@@ -31,8 +31,9 @@ void MyServer::incomingConnection(qintptr socketDescriptor)
     // Every new connection will be run in a newly created thread
     ServerThread = new MyThread(socketDescriptor, this);
 
-    connect(ServerThread, SIGNAL(signal_client_connected()), this, SLOT(slot_cli_set_connected()));
-    connect(ServerThread, SIGNAL(signal_client_disconnected()), this, SLOT(slot_cli_set_disconnected()));
+    connect(ServerThread, &MyThread::signal_client_connected, this, &MyServer::slot_cli_set_connected);
+    connect(ServerThread, &MyThread::signal_client_disconnected, this, &MyServer::slot_cli_set_disconnected);
+    connect(ServerThread, &MyThread::signal_got_data, this, &MyServer::slot_got_data);
 
     // connect signal/slot
     // once a thread is not needed, it will be beleted later
@@ -54,5 +55,9 @@ void MyServer::slot_cli_set_connected(){
 }
 void MyServer::slot_cli_set_disconnected(){
     emit signal_disconnection_signal();
+
+}
+void MyServer::slot_got_data(const QString &data){
+    emit signal_got_data(data);
 
 }

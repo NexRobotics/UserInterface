@@ -22,10 +22,10 @@ public:
 
 private slots:
     void on_inter_combo_currentTextChanged(const QString &arg1);
-
     void on_controll_combo_currentTextChanged(const QString &arg1);
     void slot_set_disconnected();
     void slot_set_connected();
+    void slot_got_data(const QString&);
 signals:
     void signal_send_from_main(const QString&);
 protected:
@@ -34,6 +34,9 @@ protected:
 private:
     Ui::MainWindow *ui;
     bool connection;
+    void ultrasound_detector_receiver(const QStringList &);
+    void set_param_tabor(int , const QString &, const QString &);
+    QStringList newdata;
 };
 
 #endif // MAINWINDOW_H

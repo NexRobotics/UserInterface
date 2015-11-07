@@ -18,6 +18,7 @@ signals:
     void error(QTcpSocket::SocketError socketerror);
     void signal_client_disconnected();
     void signal_client_connected();
+    void signal_got_data(QString data);
 
 public slots:
     void slot_read_data();

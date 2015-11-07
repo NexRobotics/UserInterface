@@ -27,7 +27,7 @@
      <enum>Qt::ClickFocus</enum>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab_widget">
      <attribute name="title">
@@ -163,7 +163,7 @@
      <attribute name="title">
       <string>Parameters</string>
      </attribute>
-     <widget class="QTableWidget" name="tableWidget">
+     <widget class="QTableWidget" name="param_table">
       <property name="geometry">
        <rect>
         <x>130</x>

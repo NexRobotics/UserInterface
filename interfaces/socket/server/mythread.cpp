@@ -25,8 +25,8 @@ void MyThread::run()
     // note - Qt::DirectConnection is used because it's multithreaded
     //        This makes the slot to be invoked immediately, when the signal is emitted.
 
-    connect(socket, SIGNAL(readyRead()), this, SLOT(slot_read_data()), Qt::DirectConnection);
-    connect(socket, SIGNAL(disconnected()), this, SLOT(slot_disconnected()));
+    connect(socket, &QIODevice::readyRead, this, &MyThread::slot_read_data, Qt::DirectConnection);
+    connect(socket, &QAbstractSocket::disconnected, this, &MyThread::slot_disconnected);
 
     // We'll have multiple clients, we want to know which is which
     qDebug() << socketDescriptor << " Client connected";
@@ -45,7 +45,8 @@ void MyThread::slot_read_data()
     QByteArray Data = socket->readAll();
 
     // will write on server side window
-    qDebug() << socketDescriptor << " Data in: " << Data;
+//    qDebug() << socketDescriptor << " Data in: " << Data;
+    emit signal_got_data(Data);
 
 
 //    socket->write(Data);

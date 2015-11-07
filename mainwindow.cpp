@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(&Mserver, &MyServer::signal_connection_signal, this, &MainWindow::slot_set_connected);
     connect(&Mserver, &MyServer::signal_disconnection_signal, this, &MainWindow::slot_set_disconnected);
     connect(this, &MainWindow::signal_send_from_main, &Mserver, &MyServer::slot_send_data);
+    connect(&Mserver, &MyServer::signal_got_data, this, &MainWindow::slot_got_data);
 }
 
 MainWindow::~MainWindow()
@@ -63,4 +64,58 @@ void MainWindow::slot_set_connected(){
 void MainWindow::slot_set_disconnected(){
     connection = false;
     ui->interface_status_label->setText("<font color='Red'>Disconnected</font>");
+}
+
+void MainWindow::slot_got_data(const QString &data){
+
+    qDebug() << " Data in: " << data;
+    newdata = data.split(";");
+    QString text = newdata[0];
+
+    if((text.contains("#Ultrasound"))&(newdata.length()>2)){
+        this->ultrasound_detector_receiver(newdata);
+    }
+
+}
+
+//#Ultrasound1;1234;123;
+void MainWindow::ultrasound_detector_receiver(const QStringList &data){
+
+    qDebug() << " Data in: " << data;
+
+//    QTableWidgetItem *set1 = new QTableWidgetItem;
+//    QTableWidgetItem *set2 = new QTableWidgetItem;
+
+//    set1->setText(data[1]);
+//    set2->setText(data[2]);
+//    ui->param_table->setItem(0,0,set1);
+//    ui->param_table->setItem(0,1,set2);
+
+    if(data[0]=="#Ultrasound1"){
+        this->set_param_tabor(0,data[1],data[2]);
+    } else if(data[0]=="#Ultrasound2"){
+        this->set_param_tabor(1,data[1],data[2]);
+    } else if(data[0]=="#Ultrasound3"){
+        this->set_param_tabor(2,data[1],data[2]);
+    } else if(data[0]=="#Ultrasound4"){
+        this->set_param_tabor(3,data[1],data[2]);
+    } else if(data[0]=="#Ultrasound5"){
+        this->set_param_tabor(4,data[1],data[2]);
+    } else if(data[0]=="#Ultrasound6"){
+        this->set_param_tabor(5,data[1],data[2]);
+    } else if(data[0]=="#Ultrasound7"){
+        this->set_param_tabor(6,data[1],data[2]);
+    }
+}
+
+void MainWindow::set_param_tabor(int row, const QString &time, const QString &val){
+
+    QTableWidgetItem *set1 = new QTableWidgetItem;
+    QTableWidgetItem *set2 = new QTableWidgetItem;
+
+    set1->setText(time);
+    set2->setText(val);
+    ui->param_table->setItem(row,0,set1);
+    ui->param_table->setItem(row,1,set2);
+
 }
