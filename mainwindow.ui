@@ -14,19 +14,22 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QTabWidget" name="tabWidget">
+   <widget class="QTabWidget" name="controll_tab">
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>20</y>
-      <width>541</width>
-      <height>371</height>
+      <y>30</y>
+      <width>571</width>
+      <height>391</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
     </property>
     <property name="currentIndex">
      <number>0</number>
     </property>
-    <widget class="QWidget" name="config_tab">
+    <widget class="QWidget" name="tab_widget">
      <attribute name="title">
       <string>Configuration</string>
      </attribute>
@@ -54,6 +57,9 @@
          </item>
          <item>
           <widget class="QComboBox" name="inter_combo">
+           <property name="focusPolicy">
+            <enum>Qt::ClickFocus</enum>
+           </property>
            <property name="layoutDirection">
             <enum>Qt::LeftToRight</enum>
            </property>
@@ -109,6 +115,9 @@
          </item>
          <item>
           <widget class="QComboBox" name="controll_combo">
+           <property name="focusPolicy">
+            <enum>Qt::ClickFocus</enum>
+           </property>
            <item>
             <property name="text">
              <string>--Choose one--</string>
@@ -154,6 +163,64 @@
      <attribute name="title">
       <string>Parameters</string>
      </attribute>
+     <widget class="QTableWidget" name="tableWidget">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>40</y>
+        <width>273</width>
+        <height>237</height>
+       </rect>
+      </property>
+      <property name="cursor" stdset="0">
+       <cursorShape>ArrowCursor</cursorShape>
+      </property>
+      <row>
+       <property name="text">
+        <string>czujnik 1</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>czujnik 2</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>czujnik 3</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>czujnik 4</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>czujnik 5</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>czujnik 6</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>czujnik 7</string>
+       </property>
+      </row>
+      <column>
+       <property name="text">
+        <string>Timestamp</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Detected</string>
+       </property>
+      </column>
+     </widget>
     </widget>
    </widget>
   </widget>
@@ -178,6 +245,11 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>controll_tab</tabstop>
+  <tabstop>inter_combo</tabstop>
+  <tabstop>controll_combo</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
