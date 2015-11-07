@@ -16,18 +16,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    interfaces/socket/server/dialog_server.cpp \
 /home/wojtekl/programowanie/Qt/LemGui/interfaces/socket/server/myserver.cpp \
-/home/wojtekl/programowanie/Qt/LemGui/interfaces/socket/server/mythread.cpp \
-    interfaces/socket/server/server.cpp
+/home/wojtekl/programowanie/Qt/LemGui/interfaces/socket/server/mythread.cpp
 
 HEADERS  += mainwindow.h \
-    interfaces/socket/server/dialog_server.h \
     interfaces/socket/server/watek.h \
 /home/wojtekl/programowanie/Qt/LemGui/interfaces/socket/server/myserver.h \
-/home/wojtekl/programowanie/Qt/LemGui/interfaces/socket/server/mythread.h \
-    interfaces/socket/server/server.h
+/home/wojtekl/programowanie/Qt/LemGui/interfaces/socket/server/mythread.h
 
-FORMS    += mainwindow.ui \
-    interfaces/socket/server/dialog_server.ui \
-    interfaces/socket/server/dialog.ui
+FORMS    += mainwindow.ui

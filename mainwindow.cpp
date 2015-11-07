@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "interfaces/socket/server/dialog_server.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
