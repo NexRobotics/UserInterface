@@ -10,9 +10,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->controll_combo->setEnabled(false);
     connection = false;
 
-    connect(&Mserver, SIGNAL(signal_connection_signal()), this, SLOT(slot_set_connected()));
-    connect(&Mserver, SIGNAL(signal_disconnection_signal()), this, SLOT(slot_set_disconnected()));
-    connect(this, SIGNAL(signal_send_from_main(const QString&)), &Mserver, SLOT(slot_send_data(const QString&)));
+    connect(&Mserver, &MyServer::signal_connection_signal, this, &MainWindow::slot_set_connected);
+    connect(&Mserver, &MyServer::signal_disconnection_signal, this, &MainWindow::slot_set_disconnected);
+    connect(this, &MainWindow::signal_send_from_main, &Mserver, &MyServer::slot_send_data);
 }
 
 MainWindow::~MainWindow()
