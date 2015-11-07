@@ -79,17 +79,12 @@ void MainWindow::slot_got_data(const QString &data){
 }
 
 //#Ultrasound1;1234;123;
+//#Ultrasound2;123we4;123;
+//#Ultrasound4;1234;12dsad3;
+//#Ultrasound5;12aa34;123;
 void MainWindow::ultrasound_detector_receiver(const QStringList &data){
 
     qDebug() << " Data in: " << data;
-
-//    QTableWidgetItem *set1 = new QTableWidgetItem;
-//    QTableWidgetItem *set2 = new QTableWidgetItem;
-
-//    set1->setText(data[1]);
-//    set2->setText(data[2]);
-//    ui->param_table->setItem(0,0,set1);
-//    ui->param_table->setItem(0,1,set2);
 
     if(data[0]=="#Ultrasound1"){
         this->set_param_tabor(0,data[1],data[2]);
