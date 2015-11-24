@@ -10,7 +10,7 @@ class Controler : public QObject
     Q_OBJECT
 public:
     explicit Controler(QObject *parent = 0);    
-    Gamepad gamepad;
+    Gamepad *gamepad;
 signals:
     void signal_controller_value_changed(QString type, int number, int value);
     void signal_controller_connection_closed();

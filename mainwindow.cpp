@@ -45,20 +45,20 @@ void MainWindow::on_controll_combo_currentTextChanged(const QString &arg1)
         ui->controll_status_label->setText("<font color='Green'>Connected</font>");
     } else if (arg1=="Gamepad"){
 
-        Gamepad *js;
-        js = new Gamepad();
-//        Controler controler;
-//        connect(&controler, &Controler::signal_controller_connection_closed, this, &MainWindow::slot_controller_connection_closed);
-//        connect(&controler, &Controler::signal_controller_value_changed, this, &MainWindow::slot_controller_value_changed);
-//        connect(&controler, &Controler::signal_got_Gamepad_info, this, &MainWindow::slot_got_Gamepad_info);
+//        Gamepad *js;
+//        js = new Gamepad();
+        controler = new Controler();
+        connect(controler, &Controler::signal_controller_connection_closed, this, &MainWindow::slot_controller_connection_closed);
+        connect(controler, &Controler::signal_controller_value_changed, this, &MainWindow::slot_controller_value_changed);
+        connect(controler, &Controler::signal_got_Gamepad_info, this, &MainWindow::slot_got_Gamepad_info);
 
 //        if (js->active==true)
 //       {
-           QString info = QString("Name : %1\nVersion: %2\nAxes: %3\nButtons: %4")
-                .arg(js->name,QString::number(js->version),QString::number(js->axes),QString::number(js->buttons));
-        ui->contr_info->setText(info);
+//           QString info = QString("Name : %1\nVersion: %2\nAxes: %3\nButtons: %4")
+//                .arg(js->name,QString::number(js->version),QString::number(js->axes),QString::number(js->buttons));
+//        ui->contr_info->setText(info);
 //        js->start();
-        ui->controll_status_label->setText("<font color='Green'>Connected</font>");
+//        ui->controll_status_label->setText("<font color='Green'>Connected</font>");
 //        }
 //        else{
 //            ui->controll_status_label->setText("<font color='red'>Connection problem</font>");
@@ -70,7 +70,7 @@ void MainWindow::on_controll_combo_currentTextChanged(const QString &arg1)
 void MainWindow::keyPressEvent(QKeyEvent* e)
 {
 //    qDebug() << ui->controll_combo->currentText();
-    if ((connection == true)&(ui->controll_combo->currentText()=="Keyboard")){
+    if (ui->controll_combo->currentText()=="Keyboard"){
             qDebug() << e->text();
       emit signal_send_from_main(e->text().toUpper());
     }
@@ -137,6 +137,16 @@ void MainWindow::set_param_tabor(int row, const QString &time, const QString &va
 
 
 
-void MainWindow::slot_controller_value_changed(QString type, int number, int value){}
+void MainWindow::slot_controller_value_changed(QString type, int number, int value){
+   QString lo = QString("%1%2;%4;\n").arg(type,QString::number(number),QString::number(value));
+                emit signal_send_from_main(lo);
+}
 void MainWindow::slot_controller_connection_closed(){}
-void MainWindow::slot_got_Gamepad_info(QStringList info){}
+void MainWindow::slot_got_Gamepad_info(QStringList info){
+    QString set = QString("Name :\t %1\nVersion:\t %2\nAxes:\t %3\nButtons:\t %4")
+                    .arg(info[0],info[1],info[2],info[3]);
+            ui->contr_info->setText(set);
+            ui->controll_status_label->setText("<font color='Green'>Connected</font>");
+
+    qDebug() << info;
+}

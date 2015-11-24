@@ -56,13 +56,17 @@ void MyThread::slot_read_data()
 void MyThread::send_data(QString data)
 {
     if (data=="W")
-        socket->write("UP;1\n");
+        socket->write("UP;1;\n");
     else if (data=="S")
-        socket->write("DOWN;1\n");
+        socket->write("DOWN;1;\n");
     else if (data=="A")
-        socket->write("LEFT;1\n");
+        socket->write("LEFT;1;\n");
     else if (data=="D")
-        socket->write("RIGHT;1\n");
+        socket->write("RIGHT;1;\n");
+    else {
+        socket->write(data.toStdString().c_str());
+    }
+    qDebug()<<data;
 }
 
 

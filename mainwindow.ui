@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>576</width>
-    <height>502</height>
+    <width>616</width>
+    <height>490</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,9 +17,9 @@
    <widget class="QTabWidget" name="controll_tab">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>30</y>
-      <width>501</width>
+      <x>10</x>
+      <y>20</y>
+      <width>581</width>
       <height>391</height>
      </rect>
     </property>
@@ -38,7 +38,7 @@
        <rect>
         <x>10</x>
         <y>80</y>
-        <width>451</width>
+        <width>541</width>
         <height>241</height>
        </rect>
       </property>
@@ -165,7 +165,7 @@
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="1,2">
          <item>
           <widget class="QLabel" name="label_5">
            <property name="text">
@@ -179,7 +179,7 @@
             <string>No data avalible</string>
            </property>
            <property name="alignment">
-            <set>Qt::AlignCenter</set>
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -258,7 +258,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>576</width>
+     <width>616</width>
      <height>25</height>
     </rect>
    </property>

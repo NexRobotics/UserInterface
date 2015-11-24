@@ -26,13 +26,14 @@ class Gamepad : public QThread
 {
     Q_OBJECT
 signals:
+    void signal_got_gamepad_info(QStringList info);
     void signal_controller_value_changed(QString type, int number, int value);
     void signal_controller_connection_closed();
-    void signal_got_Gamepad_info(QStringList info);
 public slots:
     void slot_destroy_pad();
 
   private:
+    QStringList info;
     pthread_t thread;
     int joystick_fd;
     js_event *joystick_ev;

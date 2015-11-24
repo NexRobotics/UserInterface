@@ -15,22 +15,19 @@ Gamepad::Gamepad(QObject *parent) :
         ioctl(joystick_fd, JSIOCGVERSION, &version);
         ioctl(joystick_fd, JSIOCGAXES, &axes);
         ioctl(joystick_fd, JSIOCGBUTTONS, &buttons);
-        QStringList list;
-        list.append(this->name);
-        list.append(QString::number(this->version));
-        list.append(QString::number(this->axes));
-        list.append(QString::number(this->buttons));
-        emit signal_got_Gamepad_info(list);
-
+        info.append(this->name);
+        info.append(QString::number(this->version));
+        info.append(QString::number(this->axes));
+        info.append(QString::number(this->buttons));
 
         //js->name,QString::number(js->version),QString::number(js->axes),QString::number(js->buttons)
 
 
 
-        qDebug("   Name: %s", this->name); //<< std::endl;
-        qDebug("Version: %i", this->version);// << version << std::endl;
-        qDebug("   Axes: %i", (int)this->axes);// << (int)axes << std::endl;
-        qDebug("Buttons: %i",(int)this->buttons);// << (int)buttons << std::endl;
+//        qDebug("   Name: %s", this->name); //<< std::endl;
+//        qDebug("Version: %i", this->version);// << version << std::endl;
+//        qDebug("   Axes: %i", (int)this->axes);// << (int)axes << std::endl;
+//        qDebug("Buttons: %i",(int)this->buttons);// << (int)buttons << std::endl;
         joystick_st->axis.reserve(axes);
         joystick_st->button.reserve(buttons);
         active = true;
@@ -59,11 +56,13 @@ void Gamepad::readEv() {
     if ((bytes > 0)) {
         joystick_ev->type &= ~JS_EVENT_INIT;
         if (joystick_ev->type & JS_EVENT_BUTTON) {
-            qDebug("button%i: %i", joystick_ev->number, joystick_ev->value); //<< std::endl;
+//            qDebug("button%i: %i", joystick_ev->number, joystick_ev->value); //<< std::endl;
+            emit signal_controller_value_changed("button", joystick_ev->number, joystick_ev->value);
             joystick_st->button[joystick_ev->number] = joystick_ev->value;
         }
         if (joystick_ev->type & JS_EVENT_AXIS) {
-            qDebug("axis%i: %i", joystick_ev->number, joystick_ev->value);// << version << std::endl;
+//            qDebug("axis%i: %i", joystick_ev->number, joystick_ev->value);// << version << std::endl;
+            emit signal_controller_value_changed("axis", joystick_ev->number, joystick_ev->value);
             joystick_st->axis[joystick_ev->number] = joystick_ev->value;
         }
     }
@@ -98,6 +97,7 @@ void Gamepad::slot_destroy_pad(){
 }
 
 void Gamepad::run() {
+    emit signal_got_gamepad_info(info);
     while(1){
     }
 }

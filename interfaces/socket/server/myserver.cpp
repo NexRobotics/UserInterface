@@ -10,6 +10,7 @@ MyServer::MyServer(QObject *parent) :
 
 void MyServer::startServer()
 {
+    connected = false;
     int port = 1234;
 
     if(!this->listen(QHostAddress::Any, port))
@@ -46,14 +47,18 @@ void MyServer::incomingConnection(qintptr socketDescriptor)
 
 void MyServer::slot_send_data(const QString &data)
 {
-    ServerThread->send_data(data);
+    if (connected==true){
+        ServerThread->send_data(data);
+    }
 }
 
 void MyServer::slot_cli_set_connected(){
+    connected = true;
     emit signal_connection_signal();
 
 }
 void MyServer::slot_cli_set_disconnected(){
+    connected = false;
     emit signal_disconnection_signal();
 
 }

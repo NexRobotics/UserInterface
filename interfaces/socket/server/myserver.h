@@ -13,6 +13,7 @@ public:
     explicit MyServer(QObject *parent = 0);
     void startServer();
     MyThread *ServerThread;
+    bool connected;
 
 signals:
     void signal_connection_signal();

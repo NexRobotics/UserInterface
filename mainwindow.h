@@ -42,6 +42,7 @@ protected:
 
 private:
     Ui::MainWindow *ui;
+    Controler *controler;
     bool connection;
     void ultrasound_detector_receiver(const QStringList &);
     void set_param_tabor(int , const QString &, const QString &);
