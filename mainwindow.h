@@ -5,6 +5,8 @@
 #include<QMessageBox>
 #include<QKeyEvent>
 #include "interfaces/socket/server/myserver.h"
+#include "control/gamepad.h"
+#include "control/controler.h"
 
 namespace Ui {
 class MainWindow;
@@ -26,8 +28,15 @@ private slots:
     void slot_set_disconnected();
     void slot_set_connected();
     void slot_got_data(const QString&);
+    void slot_controller_value_changed(QString type, int number, int value);
+    void slot_controller_connection_closed();
+    void slot_got_Gamepad_info(QStringList info);
 signals:
     void signal_send_from_main(const QString&);
+    void sinal_destroy_pad();
+
+
+
 protected:
     void keyPressEvent(QKeyEvent* e);
 

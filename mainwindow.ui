@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>652</width>
+    <width>576</width>
     <height>502</height>
    </rect>
   </property>
@@ -19,7 +19,7 @@
      <rect>
       <x>40</x>
       <y>30</y>
-      <width>571</width>
+      <width>501</width>
       <height>391</height>
      </rect>
     </property>
@@ -27,7 +27,7 @@
      <enum>Qt::ClickFocus</enum>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab_widget">
      <attribute name="title">
@@ -38,13 +38,13 @@
        <rect>
         <x>10</x>
         <y>80</y>
-        <width>511</width>
-        <height>131</height>
+        <width>451</width>
+        <height>241</height>
        </rect>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
+      <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,1,1">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout">
+        <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,2,2">
          <item>
           <widget class="QLabel" name="label_2">
            <property name="text">
@@ -102,9 +102,12 @@
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,2,2">
          <item>
           <widget class="QLabel" name="label">
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
            <property name="text">
             <string>Controll type</string>
            </property>
@@ -121,6 +124,11 @@
            <item>
             <property name="text">
              <string>--Choose one--</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Gamepad</string>
             </property>
            </item>
            <item>
@@ -153,6 +161,27 @@
             </widget>
            </item>
           </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Controller information</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="contr_info">
+           <property name="text">
+            <string>No data avalible</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -229,7 +258,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>652</width>
+     <width>576</width>
      <height>25</height>
     </rect>
    </property>

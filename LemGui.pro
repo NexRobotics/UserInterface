@@ -17,11 +17,15 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
 /home/wojtekl/programowanie/Qt/LemGui/interfaces/socket/server/myserver.cpp \
-/home/wojtekl/programowanie/Qt/LemGui/interfaces/socket/server/mythread.cpp
+/home/wojtekl/programowanie/Qt/LemGui/interfaces/socket/server/mythread.cpp \
+    control/controler.cpp \
+    control/gamepad.cpp
 
 HEADERS  += mainwindow.h \
     interfaces/socket/server/watek.h \
 /home/wojtekl/programowanie/Qt/LemGui/interfaces/socket/server/myserver.h \
-/home/wojtekl/programowanie/Qt/LemGui/interfaces/socket/server/mythread.h
+/home/wojtekl/programowanie/Qt/LemGui/interfaces/socket/server/mythread.h \
+    control/controler.h \
+    control/gamepad.h
 
 FORMS    += mainwindow.ui
