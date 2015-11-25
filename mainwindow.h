@@ -28,7 +28,7 @@ private slots:
     void slot_set_disconnected();
     void slot_set_connected();
     void slot_got_data(const QString&);
-    void slot_controller_value_changed(QString type, int number, int value);
+    void slot_controller_value_changed(QString xml);
     void slot_controller_connection_closed();
     void slot_got_Gamepad_info(QStringList info);
 signals:

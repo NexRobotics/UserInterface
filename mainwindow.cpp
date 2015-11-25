@@ -137,11 +137,14 @@ void MainWindow::set_param_tabor(int row, const QString &time, const QString &va
 
 
 
-void MainWindow::slot_controller_value_changed(QString type, int number, int value){
-   QString lo = QString("%1%2;%4;\n").arg(type,QString::number(number),QString::number(value));
+void MainWindow::slot_controller_value_changed(QString lo){
                 emit signal_send_from_main(lo);
 }
-void MainWindow::slot_controller_connection_closed(){}
+
+void MainWindow::slot_controller_connection_closed(){
+
+}
+
 void MainWindow::slot_got_Gamepad_info(QStringList info){
     QString set = QString("Name :\t %1\nVersion:\t %2\nAxes:\t %3\nButtons:\t %4")
                     .arg(info[0],info[1],info[2],info[3]);

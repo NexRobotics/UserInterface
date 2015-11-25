@@ -1,23 +1,56 @@
 #include "controler.h"
 #include <QDebug>
+#include "gamepads/dualshok3.h"
 
 Controler::Controler(QObject *parent) : QObject(parent)
 {
-    gamepad = new Gamepad();
-    gamepad->start();
+    pad_reader = new Gamepad();
 
-    connect(gamepad, &Gamepad::signal_controller_connection_closed, this, &Controler::slot_controller_connection_closed);
-    connect(gamepad, &Gamepad::signal_controller_value_changed, this, &Controler::slot_controller_value_changed);
-    connect(gamepad, &Gamepad::signal_got_gamepad_info, this, &Controler::slot_got_Gamepad_info);
+    //    gamepad = new DualShok3();
+
+    //        if (js->active==true)
+    //       {
+    //           QString info = QString("Name : %1\nVersion: %2\nAxes: %3\nButtons: %4")
+    //                .arg(js->name,QString::number(js->version),QString::number(js->axes),QString::number(js->buttons));
+    //        ui->contr_info->setText(info);
+    //        js->start();
+    //        ui->controll_status_label->setText("<font color='Green'>Connected</font>");
+    //        }
+    //        else{
+    //            ui->controll_status_label->setText("<font color='red'>Connection problem</font>");
+    //        }
+    if(pad_reader->active==true)
+        pad_reader->start();
+    connect(pad_reader, &Gamepad::signal_controller_connection_closed, this, &Controler::slot_controller_connection_closed);
+    connect(pad_reader, &Gamepad::signal_controller_value_changed, this, &Controler::slot_controller_value_changed);
+    connect(pad_reader, &Gamepad::signal_got_gamepad_info, this, &Controler::slot_got_Gamepad_info);
 }
 
 void Controler::slot_got_Gamepad_info(QStringList info){
+    Controlerinfo = info;
+    if(Controlerinfo[0]=="Sony PLAYSTATION(R)3 Controller"){
+        gamepad = new DualShok3();
+    }
     emit signal_got_Gamepad_info(info);
 }
 
 void Controler::slot_controller_value_changed(QString type, int number, int value){
-//    qDebug() << type;
-    emit signal_controller_value_changed(type, number, value);
+    if(!(Controlerinfo.isEmpty())){
+        if(Controlerinfo[0]=="Sony PLAYSTATION(R)3 Controller"){
+            QString lo = gamepad->xmlcreator(type, number, value);
+            qDebug ()<<lo;
+            if (lo == "not important"){
+            } else {
+                emit signal_controller_value_changed(lo);
+            }
+        }else{
+                    QString lo = QString("%1%2;%4;\n").arg(type,QString::number(number),QString::number(value));
+            emit signal_controller_value_changed(lo);
+        }
+
+
+
+    }
 }
 void Controler::slot_controller_connection_closed(){
     emit signal_controller_connection_closed();
