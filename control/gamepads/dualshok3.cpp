@@ -58,9 +58,10 @@ QString DualShok3::xmlcreator(QString type, int number, int value){
         return "not important";
     }
 //    return "gh";
-
-//    QString str = QString("%1  %2  %3\n").arg( QString::number(turn),QString::number(linearSpeed*turn), QString::number(rotation));
-            QString str = QString("<?xml version=\"1.0\" encoding=\"UTF-8\"?> <SteeringCommands> <Speed value=%1>Linear speed value</Speed> <Rotation value=%2>Rotational speed value</Rotation> </SteeringCommands>\n").arg( QString::number(turn*linearSpeed), QString::number(rotation));
+ QString str = QString("<?xml version=\"1.0\" encoding=\"UTF-8\"?> <SteeringCommands> "
+                          "<Speed value=%1>Linear speed value</Speed> "
+                          "<Rotation value=%2>Rotational speed value</Rotation> "
+                          "</SteeringCommands>\n").arg( QString::number(turn*linearSpeed), QString::number(rotation));
     return str;
 
 }

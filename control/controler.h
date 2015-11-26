@@ -10,7 +10,7 @@ class Controler : public QObject
 {
     Q_OBJECT
 public:
-    explicit Controler(QObject *parent = 0);    
+    explicit Controler(QString typ, QObject *parent = 0);
     Gamepad *pad_reader;
     BasicGamepad *gamepad;
 private:

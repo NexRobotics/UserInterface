@@ -2,28 +2,22 @@
 #include <QDebug>
 #include "gamepads/dualshok3.h"
 
-Controler::Controler(QObject *parent) : QObject(parent)
+Controler::Controler(QString typ, QObject *parent) : QObject(parent)
 {
+    if (typ == "Keyboard")
+    {
+
+    }
+    else if (typ == "Gamepad")
+    {
+
     pad_reader = new Gamepad();
-
-    //    gamepad = new DualShok3();
-
-    //        if (js->active==true)
-    //       {
-    //           QString info = QString("Name : %1\nVersion: %2\nAxes: %3\nButtons: %4")
-    //                .arg(js->name,QString::number(js->version),QString::number(js->axes),QString::number(js->buttons));
-    //        ui->contr_info->setText(info);
-    //        js->start();
-    //        ui->controll_status_label->setText("<font color='Green'>Connected</font>");
-    //        }
-    //        else{
-    //            ui->controll_status_label->setText("<font color='red'>Connection problem</font>");
-    //        }
     if(pad_reader->active==true)
         pad_reader->start();
     connect(pad_reader, &Gamepad::signal_controller_connection_closed, this, &Controler::slot_controller_connection_closed);
     connect(pad_reader, &Gamepad::signal_controller_value_changed, this, &Controler::slot_controller_value_changed);
     connect(pad_reader, &Gamepad::signal_got_gamepad_info, this, &Controler::slot_got_Gamepad_info);
+    }
 }
 
 void Controler::slot_got_Gamepad_info(QStringList info){

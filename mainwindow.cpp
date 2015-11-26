@@ -43,26 +43,26 @@ void MainWindow::on_controll_combo_currentTextChanged(const QString &arg1)
         ui->controll_status_label->setText("Unavalible");
     } else if (arg1=="Keyboard"){
         ui->controll_status_label->setText("<font color='Green'>Connected</font>");
+
+        controler = new Controler(arg1);
+        connect(controler, &Controler::signal_controller_connection_closed,
+                this, &MainWindow::slot_controller_connection_closed);
+        connect(controler, &Controler::signal_controller_value_changed,
+                this, &MainWindow::slot_controller_value_changed);
+        connect(controler, &Controler::signal_got_Gamepad_info,
+                this, &MainWindow::slot_got_Gamepad_info);
+
     } else if (arg1=="Gamepad"){
 
 //        Gamepad *js;
 //        js = new Gamepad();
-        controler = new Controler();
-        connect(controler, &Controler::signal_controller_connection_closed, this, &MainWindow::slot_controller_connection_closed);
-        connect(controler, &Controler::signal_controller_value_changed, this, &MainWindow::slot_controller_value_changed);
-        connect(controler, &Controler::signal_got_Gamepad_info, this, &MainWindow::slot_got_Gamepad_info);
-
-//        if (js->active==true)
-//       {
-//           QString info = QString("Name : %1\nVersion: %2\nAxes: %3\nButtons: %4")
-//                .arg(js->name,QString::number(js->version),QString::number(js->axes),QString::number(js->buttons));
-//        ui->contr_info->setText(info);
-//        js->start();
-//        ui->controll_status_label->setText("<font color='Green'>Connected</font>");
-//        }
-//        else{
-//            ui->controll_status_label->setText("<font color='red'>Connection problem</font>");
-//        }
+        controler = new Controler(arg1);
+        connect(controler, &Controler::signal_controller_connection_closed,
+                this, &MainWindow::slot_controller_connection_closed);
+        connect(controler, &Controler::signal_controller_value_changed,
+                this, &MainWindow::slot_controller_value_changed);
+        connect(controler, &Controler::signal_got_Gamepad_info,
+                this, &MainWindow::slot_got_Gamepad_info);
     }
 
 }
