@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include "gamepads/padreader.h"
-#include "gamepads/basicgamepad.h"
+#include "basecontroller.h"
 //#include "cjoystick.h"
 
 class Controler : public QObject
@@ -12,7 +12,7 @@ class Controler : public QObject
 public:
     explicit Controler(QString typ, QObject *parent = 0);
     Padreader *pad_reader;
-    BasicGamepad *gamepad;
+    BaseController *gamepad;
 private:
     QStringList Controlerinfo;
 signals:

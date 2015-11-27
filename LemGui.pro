@@ -20,8 +20,9 @@ SOURCES += main.cpp\
 /home/wojtekl/programowanie/Qt/LemGui/interfaces/socket/server/mythread.cpp \
     control/controler.cpp \
     control/gamepads/dualshok3.cpp \
-    control/gamepads/basicgamepad.cpp \
-    control/gamepads/padreader.cpp
+    control/gamepads/padreader.cpp \
+    control/basecontroller.cpp \
+    control/keyboard.cpp
 
 HEADERS  += mainwindow.h \
     interfaces/socket/server/watek.h \
@@ -29,7 +30,8 @@ HEADERS  += mainwindow.h \
 /home/wojtekl/programowanie/Qt/LemGui/interfaces/socket/server/mythread.h \
     control/controler.h \
     control/gamepads/dualshok3.h \
-    control/gamepads/basicgamepad.h \
-    control/gamepads/padreader.h
+    control/gamepads/padreader.h \
+    control/basecontroller.h \
+    control/keyboard.h
 
 FORMS    += mainwindow.ui
