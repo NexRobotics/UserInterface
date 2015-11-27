@@ -2,7 +2,7 @@
 #define CONTROLER_H
 
 #include <QObject>
-#include "gamepad.h"
+#include "gamepads/padreader.h"
 #include "gamepads/basicgamepad.h"
 //#include "cjoystick.h"
 
@@ -11,7 +11,7 @@ class Controler : public QObject
     Q_OBJECT
 public:
     explicit Controler(QString typ, QObject *parent = 0);
-    Gamepad *pad_reader;
+    Padreader *pad_reader;
     BasicGamepad *gamepad;
 private:
     QStringList Controlerinfo;

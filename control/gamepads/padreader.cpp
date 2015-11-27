@@ -1,9 +1,9 @@
-#include "gamepad.h"
+#include "padreader.h"
 #include <QDebug>
 #include <QtCore>
 
 
-Gamepad::Gamepad(QObject *parent) :
+Padreader::Padreader(QObject *parent) :
     QThread(parent) {
     active = false;
     joystick_fd = 0;
@@ -31,11 +31,11 @@ Gamepad::Gamepad(QObject *parent) :
         joystick_st->axis.reserve(axes);
         joystick_st->button.reserve(buttons);
         active = true;
-        pthread_create(&thread, 0, &Gamepad::loop, this);
+        pthread_create(&thread, 0, &Padreader::loop, this);
     }
 }
 
-Gamepad::~Gamepad() {
+Padreader::~Padreader() {
     if (joystick_fd > 0) {
         active = false;
         pthread_join(thread, 0);
@@ -47,11 +47,11 @@ Gamepad::~Gamepad() {
     joystick_fd = 0;
 }
 
-void* Gamepad::loop(void *obj) {
-    while (reinterpret_cast<Gamepad *>(obj)->active) reinterpret_cast<Gamepad *>(obj)->readEv();
+void* Padreader::loop(void *obj) {
+    while (reinterpret_cast<Padreader *>(obj)->active) reinterpret_cast<Padreader *>(obj)->readEv();
 }
 
-void Gamepad::readEv() {
+void Padreader::readEv() {
     int bytes = read(joystick_fd, joystick_ev, sizeof(*joystick_ev));
     if ((bytes > 0)) {
         joystick_ev->type &= ~JS_EVENT_INIT;
@@ -68,7 +68,7 @@ void Gamepad::readEv() {
     }
 }
 
-joystick_position Gamepad::joystickPosition(int n) {
+joystick_position Padreader::joystickPosition(int n) {
     joystick_position pos;
 
     if (n > -1 && n < axes) {
@@ -87,16 +87,16 @@ joystick_position Gamepad::joystickPosition(int n) {
     return pos;
 }
 
-bool Gamepad::buttonPressed(int n) {
+bool Padreader::buttonPressed(int n) {
     return n > -1 && n < buttons ? joystick_st->button[n] : 0;
 }
 
 
-void Gamepad::slot_destroy_pad(){
-    this->~Gamepad();
+void Padreader::slot_destroy_pad(){
+    this->~Padreader();
 }
 
-void Gamepad::run() {
+void Padreader::run() {
     emit signal_got_gamepad_info(info);
     while(1){
     }

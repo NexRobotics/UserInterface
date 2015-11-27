@@ -11,12 +11,12 @@ Controler::Controler(QString typ, QObject *parent) : QObject(parent)
     else if (typ == "Gamepad")
     {
 
-    pad_reader = new Gamepad();
+    pad_reader = new Padreader();
     if(pad_reader->active==true)
         pad_reader->start();
-    connect(pad_reader, &Gamepad::signal_controller_connection_closed, this, &Controler::slot_controller_connection_closed);
-    connect(pad_reader, &Gamepad::signal_controller_value_changed, this, &Controler::slot_controller_value_changed);
-    connect(pad_reader, &Gamepad::signal_got_gamepad_info, this, &Controler::slot_got_Gamepad_info);
+    connect(pad_reader, &Padreader::signal_controller_connection_closed, this, &Controler::slot_controller_connection_closed);
+    connect(pad_reader, &Padreader::signal_controller_value_changed, this, &Controler::slot_controller_value_changed);
+    connect(pad_reader, &Padreader::signal_got_gamepad_info, this, &Controler::slot_got_Gamepad_info);
     }
 }
 

@@ -5,7 +5,6 @@
 #include<QMessageBox>
 #include<QKeyEvent>
 #include "interfaces/socket/server/myserver.h"
-#include "control/gamepad.h"
 #include "control/controler.h"
 
 namespace Ui {

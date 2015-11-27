@@ -1,5 +1,5 @@
-#ifndef GAMEPAD_H
-#define GAMEPAD_H
+#ifndef PADREADER_H
+#define PADREADER_H
 
 #include <iostream>
 #include <fcntl.h>
@@ -22,7 +22,7 @@ struct joystick_state {
     std::vector<signed short> axis;
 };
 
-class Gamepad : public QThread
+class Padreader : public QThread
 {
     Q_OBJECT
 signals:
@@ -40,7 +40,7 @@ public slots:
     joystick_state *joystick_st;
 
   protected:
-  public:
+public:
     bool active;
     void run();
     __u32 version;
@@ -48,13 +48,13 @@ public slots:
     __u8 buttons;
     char name[256];
 
-    explicit Gamepad(QObject *parent = 0);
-//    cJoystick(QObject *parent);
-    ~Gamepad();
-    static void* loop(void* obj);
-    void readEv();
-    joystick_position joystickPosition(int n);
-        bool buttonPressed(int n);
+    explicit Padreader(QObject *parent = 0);
+    //    cJoystick(QObject *parent);
+        ~Padreader();
+        static void* loop(void* obj);
+        void readEv();
+        joystick_position joystickPosition(int n);
+            bool buttonPressed(int n);
 };
 
-#endif // GAMEPAD_H
+#endif // PADREADER_H
