@@ -3,8 +3,8 @@
 #include "basecontroller.h"
 #include "basecontroller.h"
 
-#define lin_speed   1000
-#define rot         1000
+#define lin_speed   32767
+#define rot         32767
 #define range       32767
 
 class Keyboard : public BaseController
