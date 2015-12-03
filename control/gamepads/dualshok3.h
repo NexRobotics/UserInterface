@@ -4,6 +4,11 @@
 #include <QObject>
 #include "../basecontroller.h"
 
+#define axis_rotation_number    0
+#define axis_liear_number       13
+#define direction_button_number    13
+#define range                   32767
+
 class DualShok3 : public BaseController
 {
     Q_OBJECT

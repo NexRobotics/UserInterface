@@ -32,11 +32,16 @@ void MyThread::run()
     qDebug() << socketDescriptor << " Client connected";
     emit signal_client_connected();
 
+
+
+
     // make this thread a loop,
     // thread will stay alive so that signal/slot to function properly
     // not dropped out in the middle when thread dies
 
     exec();
+
+
 }
 
 void MyThread::slot_read_data()

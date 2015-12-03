@@ -19,15 +19,6 @@ Padreader::Padreader(QObject *parent) :
         info.append(QString::number(this->version));
         info.append(QString::number(this->axes));
         info.append(QString::number(this->buttons));
-
-        //js->name,QString::number(js->version),QString::number(js->axes),QString::number(js->buttons)
-
-
-
-//        qDebug("   Name: %s", this->name); //<< std::endl;
-//        qDebug("Version: %i", this->version);// << version << std::endl;
-//        qDebug("   Axes: %i", (int)this->axes);// << (int)axes << std::endl;
-//        qDebug("Buttons: %i",(int)this->buttons);// << (int)buttons << std::endl;
         joystick_st->axis.reserve(axes);
         joystick_st->button.reserve(buttons);
         active = true;

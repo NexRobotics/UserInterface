@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(&Mserver, &MyServer::signal_disconnection_signal, this, &MainWindow::slot_set_disconnected);
     connect(this, &MainWindow::signal_send_from_main, &Mserver, &MyServer::slot_send_data);
     connect(&Mserver, &MyServer::signal_got_data, this, &MainWindow::slot_got_data);
+
 }
 
 MainWindow::~MainWindow()
@@ -41,38 +42,43 @@ void MainWindow::on_controll_combo_currentTextChanged(const QString &arg1)
 {
     if (arg1=="--Choose one--"){
         ui->controll_status_label->setText("Unavalible");
-    } else if (arg1=="Keyboard"){
-        ui->controll_status_label->setText("<font color='Green'>Connected</font>");
-
-        controler = new Controler(arg1);
+    } else {
+        controler = new Controler();
         connect(controler, &Controler::signal_controller_connection_closed,
                 this, &MainWindow::slot_controller_connection_closed);
-        connect(controler, &Controler::signal_controller_value_changed,
+        connect(controler, &Controler::signal_up_controller_value_changed,
                 this, &MainWindow::slot_controller_value_changed);
-        connect(controler, &Controler::signal_got_Gamepad_info,
+        connect(controler, &Controler::signal_up_got_Gamepad_info,
                 this, &MainWindow::slot_got_Gamepad_info);
+        connect(this,&MainWindow::signal_keyboard_val_change,
+                controler, &Controler::slot_keyboard_value_changed);
+        controler->set_type(arg1);
+//        if (arg1=="Keyboard"){
 
-    } else if (arg1=="Gamepad"){
+//    } else if (arg1=="Gamepad"){
 
-//        Gamepad *js;
-//        js = new Gamepad();
-        controler = new Controler(arg1);
-        connect(controler, &Controler::signal_controller_connection_closed,
-                this, &MainWindow::slot_controller_connection_closed);
-        connect(controler, &Controler::signal_controller_value_changed,
-                this, &MainWindow::slot_controller_value_changed);
-        connect(controler, &Controler::signal_got_Gamepad_info,
-                this, &MainWindow::slot_got_Gamepad_info);
-    }
+////        Gamepad *js;
+////        js = new Gamepad();
+//    }
 
+}
 }
 
 void MainWindow::keyPressEvent(QKeyEvent* e)
 {
 //    qDebug() << ui->controll_combo->currentText();
     if (ui->controll_combo->currentText()=="Keyboard"){
-            qDebug() << e->text();
-      emit signal_send_from_main(e->text().toUpper());
+        QString strin = e->text().toUpper();
+             emit signal_keyboard_val_change(strin);
+    }
+}
+
+void MainWindow::keyReleaseEvent(QKeyEvent* e)
+{
+//    qDebug() << ui->controll_combo->currentText();
+    if (ui->controll_combo->currentText()=="Keyboard"){
+       QString strin = e->text().toUpper();
+            emit signal_keyboard_val_change(strin);
     }
 }
 
@@ -146,8 +152,16 @@ void MainWindow::slot_controller_connection_closed(){
 }
 
 void MainWindow::slot_got_Gamepad_info(QStringList info){
-    QString set = QString("Name :\t %1\nVersion:\t %2\nAxes:\t %3\nButtons:\t %4")
-                    .arg(info[0],info[1],info[2],info[3]);
+    QString set;
+    if (info[1]==""){
+        set = QString("Name :\t %1")
+                        .arg(info[0]);
+
+    }else{
+        set = QString("Name :\t %1\nVersion:\t %2\nAxes:\t %3\nButtons:\t %4")
+                        .arg(info[0],info[1],info[2],info[3]);
+
+    }
             ui->contr_info->setText(set);
             ui->controll_status_label->setText("<font color='Green'>Connected</font>");
 
