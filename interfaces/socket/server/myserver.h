@@ -5,6 +5,7 @@
 
 #include <QTcpServer>
 #include "mythread.h"
+#include "../senderthread.h"
 
 class MyServer : public QTcpServer
 {
@@ -13,6 +14,7 @@ public:
     explicit MyServer(QObject *parent = 0);
     void startServer();
     MyThread *ServerThread;
+    SenderThread *sender;
     bool connected;
 
 signals:
@@ -23,7 +25,7 @@ signals:
 public slots:
     void slot_cli_set_disconnected();
     void slot_cli_set_connected();
-    void slot_send_data(const QString &);
+    void slot_set_data(const QString &);
     void slot_got_data(const QString &);
 
 protected:

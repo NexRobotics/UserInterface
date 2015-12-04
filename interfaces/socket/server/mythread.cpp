@@ -1,7 +1,6 @@
 #include "mythread.h"
 
-MyThread::MyThread(qintptr ID, QObject *parent) :
-    QThread(parent)
+MyThread::MyThread(qintptr ID, QObject *parent) : QThread(parent)
 {
     this->socketDescriptor = ID;
 }
@@ -58,7 +57,7 @@ void MyThread::slot_read_data()
 }
 
 
-void MyThread::send_data(QString data)
+void MyThread::slot_send_data(QString data)
 {
     if (data=="W")
         socket->write("UP;1;\n");

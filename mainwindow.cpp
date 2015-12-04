@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(&Mserver, &MyServer::signal_connection_signal, this, &MainWindow::slot_set_connected);
     connect(&Mserver, &MyServer::signal_disconnection_signal, this, &MainWindow::slot_set_disconnected);
-    connect(this, &MainWindow::signal_send_from_main, &Mserver, &MyServer::slot_send_data);
+    connect(this, &MainWindow::signal_send_from_main, &Mserver, &MyServer::slot_set_data);
     connect(&Mserver, &MyServer::signal_got_data, this, &MainWindow::slot_got_data);
 
 }

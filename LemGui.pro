@@ -22,7 +22,9 @@ interfaces/socket/server/mythread.cpp \
     control/gamepads/dualshok3.cpp \
     control/gamepads/padreader.cpp \
     control/basecontroller.cpp \
-    control/keyboard.cpp
+    control/keyboard.cpp \
+    interfaces/interface.cpp \
+    interfaces/socket/senderthread.cpp
 
 HEADERS  += mainwindow.h \
     interfaces/socket/server/watek.h \
@@ -32,6 +34,8 @@ interfaces/socket/server/mythread.h \
     control/gamepads/dualshok3.h \
     control/gamepads/padreader.h \
     control/basecontroller.h \
-    control/keyboard.h
+    control/keyboard.h \
+    interfaces/interface.h \
+    interfaces/socket/senderthread.h
 
 FORMS    += mainwindow.ui

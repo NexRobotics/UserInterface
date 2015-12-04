@@ -10,7 +10,6 @@ class MyThread : public QThread
     Q_OBJECT
 public:
     explicit MyThread(qintptr ID, QObject *parent = 0);
-    void send_data(QString data);
 
     void run();
 
@@ -22,6 +21,7 @@ signals:
 
 public slots:
     void slot_read_data();
+    void slot_send_data(const QString data);
     void slot_disconnected();
 
 private:

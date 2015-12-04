@@ -11,6 +11,7 @@ MyServer::MyServer(QObject *parent) :
 void MyServer::startServer()
 {
     connected = false;
+    sender = new SenderThread();
     int port = 1234;
 
     if(!this->listen(QHostAddress::Any, port))
@@ -35,6 +36,7 @@ void MyServer::incomingConnection(qintptr socketDescriptor)
     connect(ServerThread, &MyThread::signal_client_connected, this, &MyServer::slot_cli_set_connected);
     connect(ServerThread, &MyThread::signal_client_disconnected, this, &MyServer::slot_cli_set_disconnected);
     connect(ServerThread, &MyThread::signal_got_data, this, &MyServer::slot_got_data);
+    connect(sender, &SenderThread::signal_send_data, ServerThread, &MyThread::slot_send_data);
 
     // connect signal/slot
     // once a thread is not needed, it will be beleted later
@@ -45,23 +47,28 @@ void MyServer::incomingConnection(qintptr socketDescriptor)
     ServerThread->start();
 }
 
-void MyServer::slot_send_data(const QString &data)
+void MyServer::slot_set_data(const QString &data)
 {
-    if (connected==true){
-        ServerThread->send_data(data);
-    }
+
+    sender->data_changed(data);
+//    if (connected==true){
+//        ServerThread->send_data(data);
+//    }
 }
 
 void MyServer::slot_cli_set_connected(){
+    sender->data_changed("");
     connected = true;
+    sender->start();
     emit signal_connection_signal();
-
 }
+
 void MyServer::slot_cli_set_disconnected(){
     connected = false;
+    sender->terminate();
     emit signal_disconnection_signal();
-
 }
+
 void MyServer::slot_got_data(const QString &data){
     emit signal_got_data(data);
 
