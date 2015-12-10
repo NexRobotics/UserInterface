@@ -12,7 +12,7 @@ void MyServer::startServer()
 {
     connected = false;
     sender = new SenderThread();
-    int port = 1234;
+    int port = 9000;
 
     if(!this->listen(QHostAddress::Any, port))
     {
