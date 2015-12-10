@@ -27,7 +27,6 @@ interfaces/socket/server/mythread.cpp \
     interfaces/socket/senderthread.cpp
 
 HEADERS  += mainwindow.h \
-    interfaces/socket/server/watek.h \
 interfaces/socket/server/myserver.h \
 interfaces/socket/server/mythread.h \
     control/controler.h \
